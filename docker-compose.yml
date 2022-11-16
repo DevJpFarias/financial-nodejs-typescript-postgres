@@ -8,5 +8,5 @@ services:
     environment:
       POSTGRES_USER: "admin"
       POSTGRES_PASSWORD: "admin"
-      POSTGRES_DB: "challenge-full-stack-web"
+      POSTGRES_DB: "ng-challenge"
 
