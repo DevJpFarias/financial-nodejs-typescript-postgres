@@ -1,14 +1,17 @@
-import { AppError } from "../../../../AppError"
+import { AppError } from "../../../../shared/errors/AppError"
+import { FakeAccountsRepository } from "../../../accounts/repositories/fakes/FakeAccountsRepository"
 import { FakeUsersRepository } from "../../repositories/fakes/FakeUsersRepository"
 import { CreateUserService } from "./CreateUserService"
 
 let fakeUsersRepository: FakeUsersRepository
+let fakeAccountsRepository: FakeAccountsRepository
 let createUserService: CreateUserService
 
 describe('Create User Service', () => {
   beforeEach(() => {
     fakeUsersRepository = new FakeUsersRepository()
-    createUserService = new CreateUserService(fakeUsersRepository)
+    fakeAccountsRepository = new FakeAccountsRepository()
+    createUserService = new CreateUserService(fakeUsersRepository, fakeAccountsRepository)
   })
 
   it('Should not be able to create an user with an username with less than 3 characters', async () => {
@@ -59,11 +62,15 @@ describe('Create User Service', () => {
   })
 
   it('Should be able to create a new user', async () => {
+    const spyCreate = jest.spyOn(fakeUsersRepository, 'create')
+
     const user = await createUserService.execute({
       username: 'Migufe',
       password: 'superPassword1!'
     })
 
-    expect(user).toHaveProperty('id')
+    expect(spyCreate).toBeCalledTimes(1)
+    expect(user).toHaveProperty('user')
+    expect(user).toHaveProperty('account')
   })
 })

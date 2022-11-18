@@ -1,6 +1,8 @@
 import { Repository } from "typeorm"
-import { database } from "../../../helpers/database-connection-helper"
+import { PostgresDataSource } from "../../../shared/database/data-source"
+import { database } from "../../../shared/helpers/database-connection-helper"
 import { ICreateUserDTO } from "../dtos/ICreateUserDTO"
+import { IFindUserByIdDTO } from "../dtos/IFindUserByIdDTO"
 import { IFindUserByUsernameDTO } from "../dtos/IFindUserByUsernameDTO"
 import { User } from "../entity/User"
 import { IUsersRepository } from "./IUsersRepository"
@@ -24,12 +26,18 @@ export class UsersRepository implements IUsersRepository {
   }
 
   async findUserByUsername({ username }: IFindUserByUsernameDTO): Promise<User> {
-    const user = await this.ormRepository.findOne({
+    return await this.ormRepository.findOne({
       where: {
         username
       }
     })
+  }
 
-    return user
+  async findUserById({ id }: IFindUserByIdDTO): Promise<User> {
+    return await this.ormRepository.findOne({
+      where: {
+        id
+      }
+    })
   }
 }

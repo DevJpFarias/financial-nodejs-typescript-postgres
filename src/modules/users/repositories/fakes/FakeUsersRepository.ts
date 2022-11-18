@@ -3,6 +3,7 @@ import { User } from "../../entity/User";
 import { IUsersRepository } from "../IUsersRepository";
 import { v4 as uuid } from 'uuid'
 import { IFindUserByUsernameDTO } from "../../dtos/IFindUserByUsernameDTO";
+import { IFindUserByIdDTO } from "../../dtos/IFindUserByIdDTO";
 
 export class FakeUsersRepository implements IUsersRepository {
   private usersRepository: User[] = []
@@ -22,8 +23,10 @@ export class FakeUsersRepository implements IUsersRepository {
   }
 
   async findUserByUsername({ username }: IFindUserByUsernameDTO): Promise<User> {
-    const user = this.usersRepository.find(user => user.username === username)
+    return this.usersRepository.find(user => user.username === username)
+  }
 
-    return user
+  async findUserById({ id }: IFindUserByIdDTO): Promise<User> {
+    return this.usersRepository.find(user => user.id === id)
   }
 }

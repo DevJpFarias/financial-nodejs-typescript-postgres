@@ -1,6 +1,5 @@
 import { Repository } from "typeorm";
-import { database } from "../../../helpers/database-connection-helper";
-import { User } from "../../users/entity/User";
+import { database } from "../../../shared/helpers/database-connection-helper";
 import { ICreateAccountDTO } from "../dtos/ICreateAccountDTO";
 import { Account } from "../entity/Account";
 import { IAccountsRepository } from "./IAccountsRepository";

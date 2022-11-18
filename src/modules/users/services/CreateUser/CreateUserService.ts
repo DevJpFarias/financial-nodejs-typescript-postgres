@@ -1,12 +1,13 @@
-import { AppError } from "../../../../AppError";
-import { PasswordValidation } from "../../../../helpers/password-validation";
+import { AppError } from "../../../../shared/errors/AppError";
+import { PasswordValidation } from "../../../../shared/helpers/password-validation";
 import { ICreateUserDTO } from "../../dtos/ICreateUserDTO";
 import { User } from "../../entity/User";
 import { IUsersRepository } from "../../repositories/IUsersRepository";
 import { UsersRepository } from "../../repositories/UsersRepository";
-import { hash } from 'bcryptjs'
+import { hash } from 'bcrypt'
 import { AccountsRepository } from "../../../accounts/repositories/AccountsRepository";
 import { Account } from "../../../accounts/entity/Account";
+import { IAccountsRepository } from "../../../accounts/repositories/IAccountsRepository";
 
 interface IResponse {
   user: User
@@ -16,19 +17,21 @@ interface IResponse {
 export class CreateUserService {
   private usersRepository: IUsersRepository
   private passwordValidation: PasswordValidation
-  private accountsRepository: AccountsRepository
+  private accountsRepository: IAccountsRepository
 
   constructor(
-    repository: IUsersRepository
+    usersRepository: IUsersRepository,
+    accountsRepository: IAccountsRepository
     ) {
-    this.usersRepository = repository
+    this.usersRepository = usersRepository
+    this.accountsRepository = accountsRepository
 
     if(!this.usersRepository) {
       this.usersRepository = new UsersRepository()
+      this.accountsRepository = new AccountsRepository()
     }
 
     this.passwordValidation = new PasswordValidation()
-    this.accountsRepository = new AccountsRepository()
   }
 
   async execute({ username, password }: ICreateUserDTO): Promise<IResponse> {

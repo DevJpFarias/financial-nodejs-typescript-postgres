@@ -1,5 +1,5 @@
 import { DataSource } from 'typeorm'
-import { PostgresDataSource } from '../data-source'
+import { PostgresDataSource } from '../database/data-source'
 
 interface IDatabase {
 	[key: string]: DataSource

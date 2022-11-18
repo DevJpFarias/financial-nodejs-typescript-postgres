@@ -2,7 +2,7 @@ import 'reflect-metadata'
 import 'express-async-errors'
 import express, { NextFunction, Request, Response } from 'express'
 import { userRouter } from './routes/users.routes'
-import { AppError } from './AppError'
+import { AppError } from './errors/AppError'
 import { connection } from './helpers/connection-helper'
 
 connection()
