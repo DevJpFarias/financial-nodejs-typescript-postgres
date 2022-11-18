@@ -4,7 +4,7 @@ import { Account } from "./modules/accounts/entity/Account"
 import { Transaction } from "./modules/transactions/entity/Transaction"
 import { User } from "./modules/users/entity/User"
 
-export const AppDataSource = new DataSource({
+export const PostgresDataSource = new DataSource({
     type: "postgres",
     host: "localhost",
     port: 5432,

@@ -1,16 +1,18 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { User } from "../../users/entity/User";
 
 @Entity('accounts')
 export class Account {
   @PrimaryGeneratedColumn('uuid')
   id: string
 
-  @Column()
+  @Column({ default: 100 })
   balance: number
 
-  @Column('uuid')
-  debitedAccountId: string
+  @OneToOne(() => User, user => user.account)
+  @JoinColumn()
+  user: User
 
-  @Column('uuid')
-  creditedAccountId: string
+  @Column()
+  userId: string
 }

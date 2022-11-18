@@ -2,6 +2,7 @@ import { MigrationInterface, QueryRunner, Table } from "typeorm"
 
 export class CreateAccount1668525120771 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
+    await queryRunner.query('CREATE EXTENSION IF NOT EXISTS "uuid-ossp"');
     await queryRunner.createTable(
       new Table({
         name: 'accounts',
@@ -19,14 +20,20 @@ export class CreateAccount1668525120771 implements MigrationInterface {
             default: 100
           },
           {
-            name: 'debitedAccountId',
-            type: 'uuid'
-          },
-          {
-            name: 'creditedAccountId',
+            name: 'userId',
             type: 'uuid'
           }
-        ]
+        ],
+        foreignKeys: [
+					{
+						name: 'AccountUser',
+						referencedTableName: 'users',
+						referencedColumnNames: ['id'],
+						columnNames: ['userId'],
+						onDelete: 'CASCADE',
+						onUpdate: 'CASCADE',
+					},
+				],
       })
     )
   }

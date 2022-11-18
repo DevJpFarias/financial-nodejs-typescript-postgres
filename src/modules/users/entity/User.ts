@@ -13,9 +13,5 @@ export class User {
   password: string
 
   @OneToOne(() => Account, account => account.id)
-  @JoinColumn()
   account: Account
-
-  @Column('uuid')
-  accountId: string
 }
