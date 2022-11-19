@@ -3,6 +3,7 @@ import { Account } from "../../entity/Account";
 import { IAccountsRepository } from "../IAccountsRepository";
 import { v4 as uuid } from 'uuid'
 import { ICreateAccountDTO } from "../../dtos/ICreateAccountDTO";
+import { IGetBalanceRequestDTO, IGetBalanceResponseDTO } from "../../dtos/IGetBalanceDTO";
 
 export class FakeAccountsRepository implements IAccountsRepository {
   private accountsRepository: Account[] = []
@@ -18,6 +19,12 @@ export class FakeAccountsRepository implements IAccountsRepository {
     })
 
     this.accountsRepository.push(account)
+
+    return account
+  }
+
+  async getBalance({ userId }: IGetBalanceRequestDTO): Promise<Account> {
+    const account = this.accountsRepository.find(account => account.userId === userId)
 
     return account
   }

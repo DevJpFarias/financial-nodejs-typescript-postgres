@@ -1,6 +1,7 @@
 import { Repository } from "typeorm";
 import { database } from "../../../shared/helpers/database-connection-helper";
 import { ICreateAccountDTO } from "../dtos/ICreateAccountDTO";
+import { IGetBalanceRequestDTO, IGetBalanceResponseDTO } from "../dtos/IGetBalanceDTO";
 import { Account } from "../entity/Account";
 import { IAccountsRepository } from "./IAccountsRepository";
 
@@ -20,5 +21,15 @@ export class AccountsRepository implements IAccountsRepository {
     await this.ormRepository.save(accountInstance)
     
     return accountInstance
+  }
+
+  async getBalance({ userId }: IGetBalanceRequestDTO): Promise<Account> {
+    const account = await this.ormRepository.findOne({
+      where: {
+        userId
+      }
+    })
+
+    return account
   }
 }

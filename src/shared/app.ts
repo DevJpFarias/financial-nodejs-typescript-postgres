@@ -1,9 +1,9 @@
 import 'reflect-metadata'
 import 'express-async-errors'
 import express, { NextFunction, Request, Response } from 'express'
-import { userRouter } from './routes/users.routes'
 import { AppError } from './errors/AppError'
 import { connection } from './helpers/connection-helper'
+import { router } from './routes'
 
 connection()
 
@@ -11,7 +11,7 @@ const app = express()
 
 app.use(express.json())
 
-app.use(userRouter)
+app.use(router)
 
 app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
 	if(err instanceof AppError) {
