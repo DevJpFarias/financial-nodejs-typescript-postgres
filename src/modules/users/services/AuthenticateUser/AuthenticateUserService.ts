@@ -21,9 +21,7 @@ export class AuthenticateUserService {
   constructor(repository: IUsersRepository) {
     this.usersRepository = repository
 
-    if(!this.usersRepository) {
-      this.usersRepository = new UsersRepository()
-    }
+    if(!this.usersRepository) this.usersRepository = new UsersRepository()
   }
 
   async execute({ username, password }: IRequest): Promise<IResponse> {

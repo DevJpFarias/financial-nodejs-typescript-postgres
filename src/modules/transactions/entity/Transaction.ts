@@ -19,7 +19,7 @@ export class Transaction {
   creditedAccountId: string
 
   @Column()
-  value: string
+  value: number
   
   @CreateDateColumn()
   createdAt: string

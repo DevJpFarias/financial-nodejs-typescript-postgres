@@ -19,7 +19,8 @@ export class CreateTransaction1668525299678 implements MigrationInterface {
           },
           {
             name: 'createdAt',
-            type: 'timestamp'
+            type: 'timestamp',
+            default: 'now()'
           },
           {
             name: 'debitedAccountId',

@@ -13,6 +13,6 @@ export const PostgresDataSource = new DataSource({
     database: "ng-challenge",
     entities: [Account, Transaction, User],
     migrations: [
-        'src/migrations/*.ts'
+        'src/shared/database/migrations/*.ts'
     ]
 })

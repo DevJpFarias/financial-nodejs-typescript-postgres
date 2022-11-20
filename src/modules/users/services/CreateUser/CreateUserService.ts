@@ -26,10 +26,8 @@ export class CreateUserService {
     this.usersRepository = usersRepository
     this.accountsRepository = accountsRepository
 
-    if(!this.usersRepository) {
-      this.usersRepository = new UsersRepository()
-      this.accountsRepository = new AccountsRepository()
-    }
+    if(!this.usersRepository) this.usersRepository = new UsersRepository()
+    if(!this.accountsRepository) this.accountsRepository = new AccountsRepository()
 
     this.passwordValidation = new PasswordValidation()
   }

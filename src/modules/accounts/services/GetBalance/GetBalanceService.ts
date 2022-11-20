@@ -9,9 +9,7 @@ export class GetBalanceService {
   constructor(accountsRepository: IAccountsRepository) {
     this.accountsRepository = accountsRepository
 
-    if(!this.accountsRepository) {
-      this.accountsRepository = new AccountsRepository()
-    }
+    if(!this.accountsRepository) this.accountsRepository = new AccountsRepository()
   }
 
   async execute({ userId }: IGetBalanceRequestDTO): Promise<Account> {

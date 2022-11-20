@@ -1,5 +1,6 @@
 import { Repository } from "typeorm";
 import { database } from "../../../shared/helpers/database-connection-helper";
+import { ICashInDTO, ICashOutDTO } from "../dtos/ICashDTO";
 import { ICreateAccountDTO } from "../dtos/ICreateAccountDTO";
 import { IGetBalanceRequestDTO, IGetBalanceResponseDTO } from "../dtos/IGetBalanceDTO";
 import { Account } from "../entity/Account";
@@ -29,6 +30,32 @@ export class AccountsRepository implements IAccountsRepository {
         userId
       }
     })
+
+    return account
+  }
+
+  async cashIn({ userId, value }: ICashInDTO): Promise<Account> {
+    const account = await this.ormRepository.findOne({
+      where: {
+        userId
+      }
+    })
+
+    account.balance += value
+    await this.ormRepository.save(account)
+
+    return account
+  }
+
+  async cashOut({ userId, value }: ICashOutDTO): Promise<Account> {
+    const account = await this.ormRepository.findOne({
+      where: {
+        userId
+      }
+    })
+
+    account.balance -= value
+    await this.ormRepository.save(account)
 
     return account
   }
