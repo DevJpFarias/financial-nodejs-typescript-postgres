@@ -1,3 +1,4 @@
+import { instanceToInstance } from "class-transformer";
 import { Request, Response } from "express";
 import { UsersRepository } from "../repositories/UsersRepository";
 import { AuthenticateUserService } from "../services/AuthenticateUser/AuthenticateUserService";
@@ -15,6 +16,6 @@ export class AuthenticateUserController {
       password
     })
 
-    return response.json({ user, token })
+    return response.json(instanceToInstance({ user, token }))
   }
 }

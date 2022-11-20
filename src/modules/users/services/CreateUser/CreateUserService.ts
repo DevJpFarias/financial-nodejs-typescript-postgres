@@ -32,7 +32,7 @@ export class CreateUserService {
     this.passwordValidation = new PasswordValidation()
   }
 
-  async execute({ username, password }: ICreateUserDTO): Promise<IResponse> {
+  async execute({ username, password }: ICreateUserDTO): Promise<Account> {
     if(username.length < 3) throw new AppError('The username must be at least 3 characters long')
 
     const findUsername = await this.usersRepository.findUserByUsername({
@@ -67,9 +67,6 @@ export class CreateUserService {
       userId: user.id
     })
 
-    return {
-      user,
-      account
-    }
+    return account
   }
 }

@@ -1,3 +1,4 @@
+import { instanceToInstance } from "class-transformer";
 import { Request, Response } from "express";
 import { AccountsRepository } from "../../accounts/repositories/AccountsRepository";
 import { UsersRepository } from "../repositories/UsersRepository";
@@ -17,6 +18,6 @@ export class CreateUserController {
       password
     })
 
-    return response.status(201).json(user)
+    return response.status(201).json(instanceToInstance(user))
   }
 }
