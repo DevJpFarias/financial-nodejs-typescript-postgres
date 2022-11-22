@@ -41,7 +41,11 @@ export class AccountsRepository implements IAccountsRepository {
       }
     })
 
-    account.balance += value
+    let balance = Number(account.balance)
+    balance += value
+
+    account.balance = balance
+
     await this.ormRepository.save(account)
 
     return account

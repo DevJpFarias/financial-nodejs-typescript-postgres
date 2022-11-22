@@ -70,7 +70,7 @@ describe('Create User Service', () => {
     })
 
     expect(spyCreate).toBeCalledTimes(1)
-    expect(user).toHaveProperty('user')
-    expect(user).toHaveProperty('account')
+    expect(user).toHaveProperty('id')
+    expect(user).toHaveProperty('balance')
   })
 })

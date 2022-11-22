@@ -16,7 +16,7 @@ export class CreateAccount1668525120771 implements MigrationInterface {
           },
           {
             name: 'balance',
-            type: 'integer',
+            type: 'decimal',
             default: 100
           },
           {

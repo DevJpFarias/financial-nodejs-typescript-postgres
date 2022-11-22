@@ -6,7 +6,7 @@ export class Account {
   @PrimaryGeneratedColumn('uuid')
   id: string
 
-  @Column({ default: 100 })
+  @Column({ name: 'balance', type: 'decimal', precision: 10, scale: 2, default: 100 })
   balance: number
 
   @OneToOne(() => User, user => user.account)
