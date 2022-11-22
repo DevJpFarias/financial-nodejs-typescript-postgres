@@ -1,8 +1,8 @@
 import { instanceToInstance } from "class-transformer";
 import { Request, Response } from "express";
-import { AccountsRepository } from "../../accounts/repositories/AccountsRepository";
-import { TransactionsRepository } from "../repositories/TransactionsRepository";
-import { GetTransactionsService } from "../services/GetTransactions/GetTransactionsService";
+import { AccountsRepository } from "../../../accounts/repositories/AccountsRepository";
+import { TransactionsRepository } from "../../repositories/TransactionsRepository";
+import { GetTransactionsService } from "../../services/GetTransactions/GetTransactionsService";
 
 const transactionsRepository = new TransactionsRepository()
 const accountsRepository = new AccountsRepository()

@@ -22,5 +22,5 @@ export class Transaction {
   value: number
   
   @CreateDateColumn()
-  createdAt: string
+  createdAt: Date
 }
