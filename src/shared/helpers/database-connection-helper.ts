@@ -6,7 +6,7 @@ interface IDatabase {
 }
 
 const databases: IDatabase = {
-	prod: PostgresDataSource,
+	prod: PostgresDataSource
 }
 
 const environment = process.env.NODE_ENV || 'prod'
